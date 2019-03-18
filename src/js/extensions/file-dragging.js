@@ -81,7 +81,14 @@
             fileReader.addEventListener('load', function (e) {
                 var addImageElement = this.document.createElement('img');
                 addImageElement.src = e.target.result;
-                MediumEditor.util.insertHTMLCommand(this.document, addImageElement.outerHTML);
+                var wrapperElement = this.document.createElement('div');
+                var caption = this.document.createElement('caption');
+                var text = document.createTextNode("캡션을 달아주세요");
+                caption.appendChild(text);
+                wrapperElement.classList.add('image-center');
+                wrapperElement.appendChild(addImageElement);
+                wrapperElement.appendChild(caption);
+                MediumEditor.util.insertHTMLCommand(this.document, wrapperElement.outerHTML);
             }.bind(this));
         }
     });
